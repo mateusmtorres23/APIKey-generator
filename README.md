@@ -61,13 +61,13 @@ Before running the project, make sure you have:
 ## ⚙️ Installation & Execution
 
 ### 1️⃣ Clone the Repository
-```bash
+```
 git clone https://github.com/yourusername/APIKey-generator.git
 cd APIKey-generator
+```
 2️⃣ Configure Environment Variables
-Create a .env file in the project root using the following template:
-
-env
+Create a .env file in the project root using the following template
+```
 Copiar código
 # --- MongoDB Configuration ---
 MONGO_ROOT_USER='YourMongoUser'
@@ -88,10 +88,13 @@ JWT_EXPIRATION=86400000 # milliseconds (24h)
 
 # --- Server Configuration ---
 SERVER_PORT=8080
+```
+
 3️⃣ Run the Project
-bash
-Copiar código
+```
 mvn spring-boot:run
+```
+
 4️⃣ Access the API
 By default, the server runs at:
 👉 http://localhost:8080
@@ -99,10 +102,9 @@ By default, the server runs at:
 🚀 API Usage
 Authentication Header
 Most endpoints require a JWT token in the request header:
-
-makefile
-Copiar código
+```
 Authorization: Bearer <your_token_here>
+```
 Example Endpoints
 Method	Endpoint	Description
 POST	/auth/login	Authenticate user and return JWT token
