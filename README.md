@@ -105,12 +105,15 @@ Most endpoints require a JWT token in the request header:
 ```
 Authorization: Bearer <your_token_here>
 ```
-Example Endpoints
-Method	Endpoint	Description
-POST	/auth/login	Authenticate user and return JWT token
-POST	/keys/generate	Generate a new API key
-GET	/keys	List all generated API keys
-DELETE	/keys/{id}	Delete a specific API key
+
+### Example Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/login` | Authenticate user and return JWT token |
+| `POST` | `/api/keys/generate` | Generate a new API key |
+| `GET` | `/api/keys` | List all generated API keys |
+| `DELETE` | `/api/keys/{id}` | Delete a specific API key |
 
 🧪 Testing the Endpoints
 You can test the API using your preferred HTTP client:
@@ -145,6 +148,7 @@ APIKey-generator/
 ├── .gitignore
 ├── pom.xml
 └── README.md
+
 📄 License
 This project is licensed under the MIT License — feel free to use and modify it for your own learning or development projects.
 
