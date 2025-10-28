@@ -39,8 +39,8 @@ This project was created in one day as a learning exercise to explore these tech
 
 ## 🧰 Tech Stack
 
-- **Java 21**
-- **Spring Boot 3.3.5**
+- **Java 17**
+- **Spring Boot 3.5.7**
 - **Spring Security (JWT)**
 - **MongoDB (via Docker)**
 - **Maven 3.9+**
@@ -51,7 +51,7 @@ This project was created in one day as a learning exercise to explore these tech
 
 Before running the project, make sure you have:
 
-- **Java 21+**
+- **Java 17+**
 - **Maven 3.9+**
 - **Docker & Docker Compose**
 - **MongoDB** running locally or via Docker
