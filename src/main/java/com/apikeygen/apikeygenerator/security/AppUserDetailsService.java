@@ -1,11 +1,9 @@
-package com.apikeygen.apikeygenerator.service;
+package com.apikeygen.apikeygenerator.security;
 
-import com.apikeygen.apikeygenerator.model.User;
 import com.apikeygen.apikeygenerator.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service

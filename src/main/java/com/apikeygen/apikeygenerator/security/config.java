@@ -1,43 +1,55 @@
 package com.apikeygen.apikeygenerator.security;
 
-import com.apikeygen.apikeygenerator.service.AppUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class config {
 
-    private final AppUserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+    private final AuthFilter authFilter;
 
-    public config(AppUserDetailsService userDetailsService) {
+    public config(AppUserDetailsService userDetailsService, AuthFilter authFilter) {
         this.userDetailsService = userDetailsService;
+        this.authFilter = authFilter;
     }
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authprovider = new DaoAuthenticationProvider();
-        authprovider.setUserDetailsService(userDetailsService);
-        authprovider.setPasswordEncoder(bCryptPasswordEncoder());
-        return authprovider;
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, KeyFilter keyFilter) throws Exception {
         http
-                .csrf(crsf -> crsf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -45,7 +57,9 @@ public class config {
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .authenticationProvider(authenticationProvider());
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(keyFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

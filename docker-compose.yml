@@ -1,7 +1,7 @@
 services:
   webbeat-mongo:
     image: mongo:latest
-    container_name: webbeat-mongo
+    container_name: apikeygen-mongo
     restart: unless-stopped
     ports:
       - "${SPRING_MONGO_PORT}:27017"
