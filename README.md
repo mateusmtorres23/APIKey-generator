@@ -1,6 +1,6 @@
 # 🔑 APIKey-generator
 
-[![Java](https://img.shields.io/badge/Java-21-blue)]()
+[![Java](https://img.shields.io/badge/Java-17-blue)]()
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen)]()
 [![MongoDB](https://img.shields.io/badge/MongoDB-Docker%20Container-green)]()
 [![JWT](https://img.shields.io/badge/Security-JWT-orange)]()
