@@ -1,8 +1,9 @@
-package com.apikeygen.apikeygenerator.security;
+package com.apikeygen.apikeygenerator.controller;
 
 import com.apikeygen.apikeygenerator.dto.LogRequestDTO;
 import com.apikeygen.apikeygenerator.dto.LogResponseDTO;
 import com.apikeygen.apikeygenerator.dto.RegRequestDTO;
+import com.apikeygen.apikeygenerator.security.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;

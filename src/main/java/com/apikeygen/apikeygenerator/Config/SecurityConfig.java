@@ -1,5 +1,8 @@
-package com.apikeygen.apikeygenerator.security;
+package com.apikeygen.apikeygenerator.Config;
 
+import com.apikeygen.apikeygenerator.security.AppUserDetailsService;
+import com.apikeygen.apikeygenerator.security.AuthFilter;
+import com.apikeygen.apikeygenerator.security.KeyFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,12 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class config {
+public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final AuthFilter authFilter;
 
-    public config(AppUserDetailsService userDetailsService, AuthFilter authFilter) {
+    public SecurityConfig(AppUserDetailsService userDetailsService, AuthFilter authFilter) {
         this.userDetailsService = userDetailsService;
         this.authFilter = authFilter;
     }
