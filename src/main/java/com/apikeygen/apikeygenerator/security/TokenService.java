@@ -1,19 +1,13 @@
 package com.apikeygen.apikeygenerator.security;
 
-import com.apikeygen.apikeygenerator.dto.LogRequestDTO;
-import com.apikeygen.apikeygenerator.dto.LogResponseDTO;
-import com.apikeygen.apikeygenerator.dto.RegRequestDTO;
+
 import com.apikeygen.apikeygenerator.model.User;
-import com.apikeygen.apikeygenerator.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
