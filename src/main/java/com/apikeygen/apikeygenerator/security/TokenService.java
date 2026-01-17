@@ -20,20 +20,20 @@ import java.util.function.Function;
 public class TokenService {
     @Value("${api.security.jwt.secret-key}")
     private String secretKey;
-    private static final long T0KEN_VALIDITY_HR = 24;
+    private static final long TOKEN_VALIDITY_HR = 24;
 
     public String generateToken(User user) {
         Instant now = Instant.now();
-        Instant exp = now.plus(T0KEN_VALIDITY_HR, ChronoUnit.HOURS);
+        Instant exp = now.plus(TOKEN_VALIDITY_HR, ChronoUnit.HOURS);
         return Jwts.builder()
                 .subject(user.getUsername())
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(exp))
-                .signWith(getSigingKey())
+                .signWith(getSigningKey())
                 .compact();
     }
 
-    private SecretKey getSigingKey() {
+    private SecretKey getSigningKey() {
         byte[] keybytes = Decoders.BASE64.decode(this.secretKey);
         return Keys.hmacShaKeyFor(keybytes);
     }
@@ -62,7 +62,7 @@ public class TokenService {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .verifyWith(getSigingKey())
+                .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
